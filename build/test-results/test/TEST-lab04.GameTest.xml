@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="lab04.GameTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2021-04-05T13:18:27" hostname="che-desktop" time="0.138">
+  <properties/>
+  <testcase name="test_invalid_input()" classname="lab04.GameTest" time="0.017"/>
+  <testcase name="test_valid_input()" classname="lab04.GameTest" time="0.001"/>
+  <testcase name="[1] rock, rock, 0" classname="lab04.GameTest" time="0.055"/>
+  <testcase name="[2] rock, paper, -1" classname="lab04.GameTest" time="0.001"/>
+  <testcase name="[3] rock, scissors, 1" classname="lab04.GameTest" time="0.002"/>
+  <testcase name="[4] paper, rock, 1" classname="lab04.GameTest" time="0.003"/>
+  <testcase name="[5] paper, paper, 0" classname="lab04.GameTest" time="0.001"/>
+  <testcase name="[6] paper, scissors, -1" classname="lab04.GameTest" time="0.01"/>
+  <testcase name="[7] scissors, rock, -1" classname="lab04.GameTest" time="0.001"/>
+  <testcase name="[8] scissors, paper, 1" classname="lab04.GameTest" time="0.0"/>
+  <testcase name="[9] scissors, scissors, 0" classname="lab04.GameTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
