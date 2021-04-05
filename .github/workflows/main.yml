@@ -36,7 +36,47 @@ jobs:
         
       - name: compile java source code
         run: ./gradlew compileJava
+  test:
+    needs: compile
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2    
           
+      - name: setup jdk
+        uses: actions/setup-java@v2
+        with: 
+          distribution: 'adopt'
+          java-version: '11'
           
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: test
+        run: ./gradlew test
+
+      - name: upload test report
+        uses: actions/upload-artifact@v2
+        with: 
+          name: test_report
+          path: ./build/reports/tests/test
+
+  assemble:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: setup jdk
+        uses: actions/setup-java@v2
+        with: 
+          distribution: 'adopt'
+          java-version: '11'
           
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: assemble
+        run: ./gradlew assemble
 
