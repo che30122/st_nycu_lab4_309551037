@@ -7,11 +7,11 @@ on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ main ]
+    #pull_request:
+    #branches: [ main ]
 
   # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+  #workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -65,6 +65,8 @@ jobs:
   assemble:
     needs: test
     runs-on: ubuntu-latest
+    outputs:
+      jar_file_name: ${{ steps.save_file_name.outputs.jar_file_name }}
     steps:
       - uses: actions/checkout@v2
 
@@ -80,3 +82,32 @@ jobs:
       - name: assemble
         run: ./gradlew assemble
 
+      - name: setup env
+        run: echo "jar_file_name=`ls ./build/libs/`" >> $GITHUB_ENV
+
+      - id: save_file_name
+        run: echo "::set-output name=jar_file_name::${{env.jar_file_name}}"
+
+      - name: upload jar file
+        uses: actions/upload-artifact@v2
+        with:
+          name: jar file
+          path: ./build/libs
+
+   release:
+     needs: assemble
+     runs-on: ubuntu-latest
+     if: ${{ startsWith(github.ref,'ref/tags/') }}
+     steps:
+       - uses: actions/checkout@v2
+       
+       - name: download
+         uses: actions/download-artifact@v2
+         with:
+           name: jar file
+           path: ./download/artifacts
+       - name: release
+         uses: softprops/action-gh-release@v1
+         with:
+           files: ./download/artifacts/${{needs.assemble.outputs.jar_file_name}}
+      

@@ -25,6 +25,6 @@ test {
 
 jar {
 	manifest{
-		attributes 'Main-Class': 'lab4.Main'
+		attributes 'Main-Class': 'lab04.Main'
 	}
 }
