@@ -80,9 +80,9 @@ jobs:
           path: ./build/libs
 
   release:
+    if: ${{ startsWith(github.ref,'ref/tags/') }}
     needs: assemble
     runs-on: ubuntu-latest
-    if: ${{ startsWith(github.ref,'ref/tags/') }}
     steps:
       - uses: actions/checkout@v2
        
@@ -95,4 +95,5 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: ./download/artifacts/${{needs.assemble.outputs.jar_file_name}}
-      
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
