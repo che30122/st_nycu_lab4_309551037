@@ -94,20 +94,20 @@ jobs:
           name: jar file
           path: ./build/libs
 
-   release:
-     needs: assemble
-     runs-on: ubuntu-latest
-     if: ${{ startsWith(github.ref,'ref/tags/') }}
-     steps:
-       - uses: actions/checkout@v2
+  release:
+    needs: assemble
+    runs-on: ubuntu-latest
+    if: ${{ startsWith(github.ref,'ref/tags/') }}
+    steps:
+      - uses: actions/checkout@v2
        
-       - name: download
-         uses: actions/download-artifact@v2
-         with:
-           name: jar file
-           path: ./download/artifacts
-       - name: release
-         uses: softprops/action-gh-release@v1
-         with:
-           files: ./download/artifacts/${{needs.assemble.outputs.jar_file_name}}
+      - name: download
+        uses: actions/download-artifact@v2
+        with:
+          name: jar file
+          path: ./download/artifacts
+      - name: release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./download/artifacts/${{needs.assemble.outputs.jar_file_name}}
       
