@@ -7,7 +7,7 @@ public class Main{
         Scanner input=new Scanner(System.in);
         System.out.println("=== Welcome to Rock-Paper-Scissors game ===");
         for(int i=0;i<2;i++) {
-            System.out.println("Enter Player 1 choice (rock, paper or scissors):");
+            System.out.println("Enter Player %d choice (rock, paper or scissors):\n",i+1);
             choice[i] = input.next();
             try {
                 Game.validate_input(choice[i]);
