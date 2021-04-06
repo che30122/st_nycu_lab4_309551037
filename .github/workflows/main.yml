@@ -2,7 +2,8 @@ name: CI
 on:
   push:
     branches: [ master ]
-
+    tags:
+      - v*.*
 jobs:
   compile:
     runs-on: ubuntu-latest
